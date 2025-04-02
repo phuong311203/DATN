@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch sử điểm danh</title>
+</head>
+<body>
+    <h1>Lịch sử điểm danh của bạn</h1>
+
+    <!-- Hiển thị thông báo -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    {% if records %}
+        <h3>Lịch sử điểm danh:</h3>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Môn học</th>
+                    <th>Ngày</th>
+                    <th>Sinh viên điểm danh</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in records %}
+                    <tr>
+                        <td>{{ record['subject'] }}</td>
+                        <td>{{ record['date'] }}</td>
+                        <td>
+                            <ul>
+                                {% for student in record['students'] %}
+                                    <li>{{ student['student_name'] }} (ID: {{ student['student_id'] }})</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Không có lịch sử điểm danh.</p>
+    {% endif %}
+
+    <a href="/">Trở lại trang chủ</a>
+</body>
+</html>

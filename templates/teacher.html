@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm giáo viên</title>
+</head>
+<body>
+    <h1>Thêm giáo viên</h1>
+
+    <!-- Hiển thị thông báo -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="/addteacher">
+        <label for="teacher_username">Tên đăng nhập giáo viên:</label>
+        <input type="text" id="teacher_username" name="teacher_username" required><br>
+
+        <label for="teacher_password">Mật khẩu:</label>
+        <input type="password" id="teacher_password" name="teacher_password" required><br>
+
+        <label for="subjects">Chọn môn học:</label><br>
+        {% for subject in subjects %}
+            <input type="checkbox" name="subjects" value="{{ subject }}">{{ subject }}<br>
+        {% endfor %}
+
+        <button type="submit">Thêm giáo viên</button>
+    </form>
+
+    <a href="/">Trở lại trang chủ</a>
+</body>
+</html>

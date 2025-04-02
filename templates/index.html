@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý điểm danh</title>
+</head>
+<body>
+    <h1>Trang chủ</h1>
+
+    <!-- Hiển thị thông báo -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Đăng ký khuôn mặt -->
+    <h2>Đăng ký khuôn mặt sinh viên</h2>
+    <form method="POST" action="/register">
+        <label for="student_name">Tên sinh viên:</label>
+        <input type="text" id="student_name" name="student_name" required>
+        <button type="submit">Đăng ký</button>
+    </form>
+</body>
+</html>
